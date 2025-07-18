@@ -1,0 +1,49 @@
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
+const URL = require("url");
+const qs = require("qs");
+
+function initApp(req, res) {
+  const { pathname, query } = URL.parse(req.url);
+
+  req.query = qs.parse(query);
+  req.pathname = pathname;
+
+  res.json = (data) => {
+    res.setHeader("content-type", "application/json");
+    res.end(JSON.stringify(data));
+  };
+}
+
+const server = http.createServer((req, res) => {
+  initApp(req, res);
+
+  const { pathname, method } = req;
+
+  if (pathname === "/login" && method === "GET") {
+    return res.end(fs.readFileSync(path.resolve(__dirname, "form-post.html")));
+  }
+
+  if (pathname === "/login" && method === "POST") {
+    const chunks = [];
+    req.on("data", (chunk) => {
+      chunks.push(chunk);
+    });
+
+    req.on("end", () => {
+      const buffer = Buffer.concat(chunks);
+      const str = buffer.toString();
+      const body = qs.parse(str);
+
+      return res.json(body);
+    });
+
+    return;
+  }
+
+  res.statusCode = 404;
+  res.end("Page not found");
+});
+
+server.listen(3333, () => console.log("Server is up"));

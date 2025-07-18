@@ -1,6 +1,6 @@
-function convert(text, from, to) {
+module.exports = function convert(text, from, to) {
   return Buffer.from(text, from).toString(to);
-}
+};
 
 const base64 = convert("Ali Mousavi", "utf8", "base64");
 
