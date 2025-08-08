@@ -1,0 +1,16 @@
+<%- include("../../layouts/main-top.ejs") %>
+
+<div>
+  <p><%= article.text %></p>
+  <hr class="my-5" />
+  <div class="flex gap-2 flex-col">
+    <a
+      class="text-blue-600 underline"
+      href="/admin/article/edit/<%= article.id %>"
+      >Edit</a
+    >
+    <a class="text-blue-600 underline" href="/admin/article">Back to list</a>
+  </div>
+</div>
+
+<%- include("../../layouts/main-bottom.ejs") %>

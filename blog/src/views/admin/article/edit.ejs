@@ -1,0 +1,42 @@
+<%- include("../../layouts/main-top.ejs") %>
+
+<div>
+  <form action="/admin/article/<%= article.id %>" method="post">
+    <input type="hidden" value="PUT" name="_method" />
+    <div class="flex flex-col gap-5">
+      <div class="flex justify-between w-[50%]">
+        <label for="title">Title</label>
+        <input
+          id="title"
+          type="text"
+          name="title"
+          class="border border-blue-300 p-2"
+          value="<%= article.title %>"
+        />
+      </div>
+
+      <div class="flex justify-between w-[50%]">
+        <label for="title">Text</label>
+        <textarea
+          id="title"
+          type="text"
+          name="text"
+          class="border border-blue-300 p-2"
+        >
+<%= article.text %>
+        </textarea>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          class="border bg-blue-500 px-5 py-2 rounded text-white"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<%- include("../../layouts/main-bottom.ejs") %>

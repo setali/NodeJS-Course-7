@@ -1,4 +1,7 @@
+import { NotFoundError } from "../utils/errors.mjs";
+
 export function home(req, res) {
+  console.log(ali);
   res.render("index", {
     title: "Homepage",
     content: "This is homepage",

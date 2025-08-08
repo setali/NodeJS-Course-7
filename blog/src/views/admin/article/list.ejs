@@ -1,0 +1,39 @@
+<%- include("../../layouts/main-top.ejs") %>
+
+<div>
+  <div class="my-4">
+    <a href="/admin/article/create" class="text-blue-600 underline"
+      >Create new article</a
+    >
+  </div>
+  <table class="border-collapse border border-gray-400 w-full">
+    <thead>
+      <tr>
+        <th class="border border-gray-300 px-4 py-2">ID</th>
+        <th class="border border-gray-300 px-4 py-2">Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const article of articles) { %>
+      <tr>
+        <td class="border border-gray-300 px-4 py-2"><%= article.id %></td>
+        <td class="border border-gray-300 px-4 py-2"><%= article.title %></td>
+        <td class="border border-gray-300 px-4 py-2 flex gap-2">
+          <a class="text-blue-600" href="/admin/article/<%= article.id %>"
+            >Show</a
+          >
+          <a class="text-blue-600" href="/admin/article/edit/<%= article.id %>"
+            >Edit</a
+          >
+          <form action="/admin/article/<%= article.id %>" method="POST">
+            <input type="hidden" name="_method" value="DELETE" />
+            <button type="submit" class="text-blue-600">Delete</button>
+          </form>
+        </td>
+      </tr>
+
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<%- include("../../layouts/main-bottom.ejs") %>

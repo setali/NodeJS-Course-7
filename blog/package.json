@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "npm run dev:css | npm run dev",
-    "dev": "node --watch src/index.mjs",
+    "dev": "node --env-file=.env --watch src/index.mjs",
     "css": "tailwindcss -i ./public/styles/main.css -o ./public/styles/output.css",
     "dev:css": "tailwindcss -i ./public/styles/main.css -o ./public/styles/output.css --watch"
   },
@@ -15,7 +15,10 @@
   "description": "",
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "method-override": "^3.0.0",
+    "mysql2": "^3.14.3",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"

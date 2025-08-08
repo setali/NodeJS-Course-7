@@ -2,14 +2,21 @@ import express from "express";
 import routes from "./routes/index.mjs";
 import errorHandler from "./middlewares/error-handler.mjs";
 import path from "path";
+import overrideMethod from "./middlewares/override-method.mjs";
+import { sequelize } from "./config/database.mjs";
 
 const app = express();
 
+await sequelize.authenticate();
+await sequelize.sync();
+
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve(import.meta.dirname, "views"));
 
+app.use(overrideMethod);
 app.use(routes);
 app.use(errorHandler);
 
