@@ -1,8 +1,6 @@
 import Article from "../../models/article.mjs";
 import { NotFoundError } from "../../utils/errors.mjs";
 
-const articles = [];
-
 class ArticleController {
   async list(req, res) {
     const articles = await Article.findAll();
@@ -10,6 +8,7 @@ class ArticleController {
     res.render("admin/article/list", {
       title: "Article list",
       articles,
+      user: req.user,
     });
   }
 
@@ -25,12 +24,14 @@ class ArticleController {
     res.render("admin/article/detail", {
       title: article.title,
       article,
+      user: req.user,
     });
   }
 
   create(req, res) {
     res.render("admin/article/create", {
       title: "Create new Article",
+      user: req.user,
     });
   }
 
@@ -54,6 +55,7 @@ class ArticleController {
     res.render("admin/article/edit", {
       title: `Edit article ${article.title}`,
       article,
+      user: req.user,
     });
   }
 

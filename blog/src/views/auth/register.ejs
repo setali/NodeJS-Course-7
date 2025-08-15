@@ -1,0 +1,38 @@
+<%- include("../layouts/main-top.ejs") %>
+
+<div>
+  <form action="/register" method="post">
+    <div class="flex flex-col gap-5">
+      <div class="flex justify-between w-[50%]">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          name="username"
+          class="border border-blue-300 p-2"
+        />
+      </div>
+
+      <div class="flex justify-between w-[50%]">
+        <label for="username">Password</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          class="border border-blue-300 p-2"
+        />
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          class="border bg-blue-500 px-5 py-2 rounded text-white"
+        >
+          Register
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<%- include("../layouts/main-bottom.ejs") %>
