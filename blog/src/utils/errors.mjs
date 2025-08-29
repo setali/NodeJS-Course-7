@@ -6,10 +6,18 @@ export class NotFoundError extends Error {
   }
 }
 
-export class NotAuthorizeError extends Error {
+export class UnAuthorizeError extends Error {
   status = 401;
 
   constructor(message = "Not Authorize") {
+    super(message);
+  }
+}
+
+export class ForbiddenError extends Error {
+  status = 403;
+
+  constructor(message = "ForbiddenError") {
     super(message);
   }
 }
@@ -21,4 +29,3 @@ export class BadRequestError extends Error {
     super(message);
   }
 }
-

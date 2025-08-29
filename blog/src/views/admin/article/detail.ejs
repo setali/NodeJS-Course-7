@@ -2,6 +2,10 @@
 
 <div>
   <p><%= article.text %></p>
+  <div class="flex gap-2">
+    <div>Author</div>
+    <div><%= article.user.username %></div>
+  </div>
   <hr class="my-5" />
   <div class="flex gap-2 flex-col">
     <a

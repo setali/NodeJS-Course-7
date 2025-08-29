@@ -3,19 +3,20 @@ import { NotFoundError } from "../../utils/errors.mjs";
 
 class ArticleController {
   async list(req, res) {
-    const articles = await Article.findAll();
+    const data = await Article.findPaginate(req.query.page, {
+      include: ["user"],
+    });
 
     res.render("admin/article/list", {
       title: "Article list",
-      articles,
-      user: req.user,
+      ...data,
     });
   }
 
   async get(req, res) {
     const { id } = req.params;
 
-    const article = await Article.findByPk(id);
+    const article = await Article.find(id, { include: ["user"] });
 
     if (!article) {
       throw new NotFoundError("Article not found");
@@ -38,7 +39,7 @@ class ArticleController {
   async add(req, res) {
     const { title, text } = req.body;
 
-    await Article.create({ title, text });
+    await Article.create({ title, text, userId: req.user.id });
 
     res.redirect("/admin/article");
   }

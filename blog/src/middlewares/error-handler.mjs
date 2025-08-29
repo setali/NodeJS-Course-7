@@ -12,9 +12,17 @@ export default (error, req, res, next) => {
     content = status < 500 ? error.message : "Server Error";
   }
 
-  res.status(status).render("error", {
-    title: `Error ${status}`,
-    content,
-    stack,
-  });
+  if (req.url.startsWith("/api")) {
+    res.status(status).json({
+      title: `Error ${status}`,
+      content,
+      stack,
+    });
+  } else {
+    res.status(status).render("error", {
+      title: `Error ${status}`,
+      content,
+      stack,
+    });
+  }
 };

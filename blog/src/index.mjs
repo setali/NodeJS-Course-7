@@ -24,10 +24,12 @@ const redisStore = new RedisStore({
 const app = express();
 
 await sequelize.authenticate();
-await sequelize.sync();
+await sequelize.sync({ alter: true });
+// await sequelize.sync();
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve(import.meta.dirname, "views"));
@@ -37,8 +39,7 @@ app.use(
     store: redisStore,
     resave: false,
     saveUninitialized: true,
-    secret:
-      "jArP2tM0YAdK1BAai2ltj7YuK76Fxffn6joXmLorlNay6StqqHDh/h8+VC2xklj7S+VbAhN7tBiizdbtor7fEw",
+    secret: process.env.SESSION_SECRET,
   })
 );
 

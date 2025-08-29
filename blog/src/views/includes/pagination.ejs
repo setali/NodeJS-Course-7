@@ -1,0 +1,9 @@
+<div>
+  <ul class="flex gap-2 my-5">
+    <% for (let i = 1; i<= pages; i++) { %>
+    <li class="<%= i === page ? 'text-green-500' : '' %>">
+      <a href="?page=<%= i %>"><%= i %></a>
+    </li>
+    <% } %>
+  </ul>
+</div>

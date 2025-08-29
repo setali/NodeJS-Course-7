@@ -11,13 +11,17 @@
       <tr>
         <th class="border border-gray-300 px-4 py-2">ID</th>
         <th class="border border-gray-300 px-4 py-2">Title</th>
+        <th class="border border-gray-300 px-4 py-2">Author</th>
       </tr>
     </thead>
     <tbody>
-      <% for (const article of articles) { %>
+      <% for (const article of items) { %>
       <tr>
         <td class="border border-gray-300 px-4 py-2"><%= article.id %></td>
         <td class="border border-gray-300 px-4 py-2"><%= article.title %></td>
+        <td class="border border-gray-300 px-4 py-2">
+          <%= article.user.username %>
+        </td>
         <td class="border border-gray-300 px-4 py-2 flex gap-2">
           <a class="text-blue-600" href="/admin/article/<%= article.id %>"
             >Show</a
@@ -35,5 +39,6 @@
       <% } %>
     </tbody>
   </table>
+  <%- include("../../includes/pagination.ejs") %>
 </div>
 <%- include("../../layouts/main-bottom.ejs") %>

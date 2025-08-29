@@ -1,15 +1,23 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config/database.mjs";
+import { BaseModel, sequelize } from "../config/database.mjs";
 
-const Article = sequelize.define("article", {
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
+class Article extends BaseModel {}
+
+Article.init(
+  {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
-  text: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-});
+  {
+    sequelize,
+    modelName: "article",
+  }
+);
 
 export default Article;
