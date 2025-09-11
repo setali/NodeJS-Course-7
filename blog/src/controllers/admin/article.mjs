@@ -38,8 +38,9 @@ class ArticleController {
 
   async add(req, res) {
     const { title, text } = req.body;
+    const image = req.file?.path?.split("/").splice(1).join("/");
 
-    await Article.create({ title, text, userId: req.user.id });
+    await Article.create({ title, text, image, userId: req.user.id });
 
     res.redirect("/admin/article");
   }

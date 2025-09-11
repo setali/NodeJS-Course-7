@@ -1,7 +1,7 @@
 <%- include("../../layouts/main-top.ejs") %>
 
 <div>
-  <form action="/admin/article/add" method="post">
+  <form action="/admin/article/add" method="post" enctype="multipart/form-data">
     <div class="flex flex-col gap-5">
       <div class="flex justify-between w-[50%]">
         <label for="title">Title</label>
@@ -19,6 +19,15 @@
           id="title"
           type="text"
           name="text"
+          class="border border-blue-300 p-2"
+        ></textarea>
+      </div>
+
+      <div class="flex justify-between w-[50%]">
+        <label for="title">File</label>
+        <input
+          type="file"
+          name="file"
           class="border border-blue-300 p-2"
         ></textarea>
       </div>

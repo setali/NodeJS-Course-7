@@ -23,16 +23,21 @@ class ArticleController {
   }
 
   async create(req, res) {
-    const { title, text } = req.body;
+    const { title, text, image } = req.body;
 
-    const article = await Article.create({ title, text, userId: req.user.id });
+    const article = await Article.create({
+      title,
+      text,
+      image,
+      userId: req.user.id,
+    });
 
     res.json(article);
   }
 
   async update(req, res) {
     const { id } = req.params;
-    const { title, text } = req.body;
+    const { title, text, image } = req.body;
 
     const article = await Article.find(id);
 
@@ -42,6 +47,7 @@ class ArticleController {
 
     article.title = title;
     article.text = text;
+    article.image = image;
 
     await article.save();
 

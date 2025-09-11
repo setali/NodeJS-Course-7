@@ -2,6 +2,10 @@ import User from "../../models/user.mjs";
 import { BadRequestError } from "../../utils/errors.mjs";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "../../utils/token.mjs";
 
 class AuthController {
   async login(req, res) {
@@ -25,17 +29,35 @@ class AuthController {
 
     user.setDataValue("password", undefined);
 
-    const token = jwt.sign(
-      { id: user.id, username: user.username, role: user.role },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "1000s",
-      }
-    );
+    const accessToken = generateAccessToken(user);
+
+    const refreshToken = generateRefreshToken(user);
 
     res.json({
       ...user.dataValues,
-      token,
+      accessToken,
+      refreshToken,
+    });
+  }
+
+  user(req, res) {
+    return res.json(req.user);
+  }
+
+  async getAccessToken(req, res, next) {
+    const { refreshToken } = req.body;
+
+    jwt.verify(refreshToken, process.env.JWT_SECRET, async (error, payload) => {
+      if (error) {
+        next(new BadRequestError(error));
+      } else {
+        const user = await User.findByPk(payload.id);
+
+        const accessToken = generateAccessToken(user);
+        res.json({
+          accessToken,
+        });
+      }
     });
   }
 }

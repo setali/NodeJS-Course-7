@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { BadRequestError } from "../utils/errors.mjs";
+import { UnAuthorizeError } from "../utils/errors.mjs";
 
 export default (req, res, next) => {
   if (req.headers.authorization) {
@@ -7,7 +7,7 @@ export default (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (error, payload) => {
       if (error) {
-        throw new BadRequestError(error);
+        throw new UnAuthorizeError(error);
       }
 
       req.user = payload;
