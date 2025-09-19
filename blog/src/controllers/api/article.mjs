@@ -1,5 +1,6 @@
 import Article from "../../models/article.mjs";
 import { UnAuthorizeError, NotFoundError } from "../../utils/errors.mjs";
+import { log } from "../../utils/logger.mjs";
 
 class ArticleController {
   async list(req, res) {
@@ -32,7 +33,9 @@ class ArticleController {
       userId: req.user.id,
     });
 
-    res.json(article);
+    log({ message: "article:create", metadata: { article, user: req.user } });
+
+    res.status(201).json(article);
   }
 
   async update(req, res) {

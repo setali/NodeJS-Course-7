@@ -6,6 +6,7 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from "../../utils/token.mjs";
+import { log } from "../../utils/logger.mjs";
 
 class AuthController {
   async login(req, res) {
@@ -30,8 +31,9 @@ class AuthController {
     user.setDataValue("password", undefined);
 
     const accessToken = generateAccessToken(user);
-
     const refreshToken = generateRefreshToken(user);
+
+    log({ message: "user:login", metadata: { user } });
 
     res.json({
       ...user.dataValues,

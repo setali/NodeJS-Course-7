@@ -6,6 +6,7 @@ import AuthProvider from "./providers/AuthProvider";
 import useAuth from "./hooks/useAuth";
 import { Route, Routes } from "react-router";
 import ArticleRouter from "./components/article/Router";
+import ChatApp from "./components/chat/ChatApp";
 
 const { Header, Footer, Content } = Layout;
 
@@ -30,6 +31,7 @@ function App() {
             <Content>
               <Routes>
                 <Route path="/article/*" element={<ArticleRouter />} />
+                <Route path="/chat" element={<ChatApp />} />
               </Routes>
             </Content>
           </Layout>

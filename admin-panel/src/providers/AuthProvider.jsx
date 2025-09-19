@@ -3,6 +3,7 @@ import request, { requestWithoutAuth } from "../tools/request";
 import {
   getAccessToken,
   removeAccessToken,
+  removeRefreshToken,
   setAccessToken,
   setRefreshToken,
 } from "../tools/utils";
@@ -36,6 +37,7 @@ export default function AuthProvider({ children }) {
   function logout() {
     setIsLoggedIn(false);
     removeAccessToken();
+    removeRefreshToken();
   }
 
   useEffect(() => {

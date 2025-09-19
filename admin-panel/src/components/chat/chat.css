@@ -1,0 +1,74 @@
+ul,
+li {
+  list-style: none;
+}
+
+.chat-app {
+  display: flex;
+}
+
+.users {
+  flex: 1;
+  border-right: 1px solid gray;
+}
+
+.users .user {
+  font-weight: bold;
+  cursor: pointer;
+  padding: 1rem;
+  border-bottom: 1px solid gray;
+}
+
+.users .user.active {
+  background-color: gainsboro;
+}
+
+.chat-box {
+  flex: 5;
+}
+
+.message-wrapper {
+  height: 60vh;
+  overflow-y: scroll;
+}
+
+.messages-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.messages-list .message {
+  width: 80%;
+  background-color: gainsboro;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.messages-list .message.owner {
+  background-color: aquamarine;
+  margin-left: auto;
+}
+
+.messages-list .message .time {
+  text-align: right;
+}
+
+.chat-form {
+  width: 100%;
+  padding: 1rem;
+  border-top: 1px solid gray;
+}
+
+.chat-input {
+  width: 100%;
+}
+
+.chat-empty {
+  flex: 5;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

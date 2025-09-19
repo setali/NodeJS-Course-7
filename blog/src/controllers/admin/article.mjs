@@ -40,7 +40,14 @@ class ArticleController {
     const { title, text } = req.body;
     const image = req.file?.path?.split("/").splice(1).join("/");
 
-    await Article.create({ title, text, image, userId: req.user.id });
+    const article = await Article.create({
+      title,
+      text,
+      image,
+      userId: req.user.id,
+    });
+
+    log({ message: "article:create", metadata: { article } });
 
     res.redirect("/admin/article");
   }
